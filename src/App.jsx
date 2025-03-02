@@ -2,7 +2,7 @@ import { useState } from 'react'
 import bookLogo from './assets/books.png'
 import { Routes, Route, Link } from 'react-router-dom'
 import Account from './components/Account'
-import Books from './components/Books'
+import Home from './components/Books'
 import Login from './components/Login'
 import Navigations from './components/Navigations'
 import Register from './components/Register'
@@ -38,7 +38,7 @@ root.render(myElement);
         <Route path="Login" element={<Login />}/>
         <Route path="Register/:if no account" element={<Register />}/>
         <Route path="Account" element={<Account />}/>
-        <Route path="Books" element={<Books />}/>
+        <Route path="Home" element={<Home />}/>
         <Route path="Navigations" element={<Navigations />}/>
         <Route path="SingleBook" element={<SingleBook />}/>
       </Routes>
