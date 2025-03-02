@@ -1,35 +1,42 @@
-import { useState } from 'react'
+import { createElement, useState } from 'react'
 import bookLogo from './assets/books.png'
 import { Routes, Route, Link } from 'react-router-dom'
 import Account from './components/Account'
-import Home from './components/Books'
+import Books from './components/Books'
 import Login from './components/Login'
 import Navigations from './components/Navigations'
 import Register from './components/Register'
 import SingleBook from './components/SingleBook'
 import './App.css'
+import ReactDOM from 'react-dom/client'
 function App() {
   const [token, setToken] = useState(null)
-
-  const myElement = <h1>Library</h1>;
-
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(myElement);
-
   return (
     <>
       <h1><img id='logo-image' src={bookLogo}/>Library App</h1>
-      
+      <h2>
+        <ul>
+          <li>
+          <a href='Login'>Login</a>
+          </li>
+          <li><a href='Account'>Account</a></li>
+        </ul>
+        <li>
+          <a href='Books'>Books</a>
+        </li>
+        <li>
+          <a href='Navigations'>Navigations</a>
+        </li>
+        <a href='SingleBook'>SingleBook</a>
+        </h2>
 
       <p>Complete the React components needed to allow users to browse a library catalog, check out books, review their account, and return books that they've finished reading.</p>
-<div id='container'>
-  <div class='navbar'>
-    <Link to="/Login">Login</Link>
+
     
     
     
-          </div>
-</div>
+          
+
       <p>You may need to use the `token` in this top-level component in other components that need to know if a user has logged in or not.</p>
       <Nav />
       <Routes>
@@ -38,13 +45,13 @@ root.render(myElement);
         <Route path="Login" element={<Login />}/>
         <Route path="Register/:if no account" element={<Register />}/>
         <Route path="Account" element={<Account />}/>
-        <Route path="Home" element={<Home />}/>
+        <Route path="Books" element={<Books />}/>
         <Route path="Navigations" element={<Navigations />}/>
         <Route path="SingleBook" element={<SingleBook />}/>
       </Routes>
     </>
   )
 }
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(<App />);
+
+ReactDOM.root.render(document.getElementById('root')).render
 export default App
