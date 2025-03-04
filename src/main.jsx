@@ -12,3 +12,4 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   </StrictMode>
   </BrowserRouter>
 )
+export default App

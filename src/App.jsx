@@ -8,29 +8,21 @@ import Navigations from './components/Navigations'
 import Register from './components/Register'
 import SingleBook from './components/SingleBook'
 import './App.css'
-import ReactDOM from 'react-dom/client'
+
+try{
+  const response= await fetch ('https://fsa-book-buddy-b6e748d1380d.herokuapp.com/api/2410-FTB-ET-WEB-AM')
+  const data = await response.json();
+}catch(error){
+(console.error())}
+
 function App() {
   const [token, setToken] = useState(null)
   return (
     <>
       <h1><img id='logo-image' src={bookLogo}/>Library App</h1>
-      <h2>
-        <ul>
-          <li>
-          <a href='Login'>Login</a>
-          </li>
-          <li><a href='Account'>Account</a></li>
-        </ul>
-        <li>
-          <a href='Books'>Books</a>
-        </li>
-        <li>
-          <a href='Navigations'>Navigations</a>
-        </li>
-        <a href='SingleBook'>SingleBook</a>
-        </h2>
-
-      <p>Complete the React components needed to allow users to browse a library catalog, check out books, review their account, and return books that they've finished reading.</p>
+     
+      <p><Link to="/Books">Available Books</Link></p>
+      <p>sosos</p>
 
     
     
@@ -38,7 +30,8 @@ function App() {
           
 
       <p>You may need to use the `token` in this top-level component in other components that need to know if a user has logged in or not.</p>
-      <Nav />
+
+      <Login />
       <Routes>
         {/* this route defines what the user sees at base url */}
         <Route path='/' element={<h1>Home</h1>}/>
@@ -53,5 +46,4 @@ function App() {
   )
 }
 
-ReactDOM.root.render(document.getElementById('root')).render
 export default App

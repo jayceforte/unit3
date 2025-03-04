@@ -4,6 +4,7 @@ import './Login.css'
 const Login = () => {
     const [action,setAction] = useState("Sign Up")
 return(
+    
     <div className="container">
         <div className="header">
             <div className="text">{action}</div>
@@ -28,5 +29,6 @@ return(
         </div>
     </div>
 );
+
 }
 export default Login;
