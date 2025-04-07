@@ -1,4 +1,3 @@
-import { createElement, useState } from 'react'
 import bookLogo from './assets/books.png'
 import { Routes, Route, Link } from 'react-router-dom'
 import Account from './components/Account'
@@ -7,7 +6,7 @@ import Login from './components/Login'
 import Navigations from './components/Navigations'
 import Register from './components/Register'
 import SingleBook from './components/SingleBook'
-import './App.css'
+import './index.css'
 
 try{
   const response= await fetch ('https://fsa-book-buddy-b6e748d1380d.herokuapp.com/api/2410-FTB-ET-WEB-AM')
@@ -16,7 +15,7 @@ try{
 (console.error())}
 
 function App() {
-  c
+  
   return (
     <>
       <h1><img id='logo-image' src={bookLogo}/>Library App</h1>
