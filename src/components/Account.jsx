@@ -1,53 +1,55 @@
-import React, { useEffect, useState } from "react"
-import { useNavigate } from "react-router-dom"
+import { useEffect, useState } from 'react';
 
-const Account = () =>{
-const [userInfo, setUserInfo] = useState(null);
-const [checkedOutBooks, setCheckedOutBooks] = useState([]);
-const [loading, setLoading] = useState(true);
-const [error, setError] = useState(null);
-const navigate = useNavigate();
+export default function Account() {
+  const [user, setUser] = useState(null);
+  const [error, setError] = useState(null);
 
-const getUserInfo = async () => {
-    const token = localStorage.getItem("token");
-    if (!token) return;
+  useEffect(() => {
+    async function fetchUserData() {
+      const token = localStorage.getItem('token');
+      if (!token) {
+        setError('No token found. Please log in.');
+        return;
+      }
 
-    const response = await fetch(
-        "https://fsa-book-buddy-b6e748d1380d.herokuapp.com/api/users/me",
-{
-    headers: {
-        "Content-Type": "application/json",
-        Auth: `Bearer ${token}`,
-    },
-}
-    );
-    const result = await response.json();
-    console.log(result);
-    setUserInfo(result);
-};
-useEffect(() => {
-    getUserInfo();
-}, []);
-return(
+      try {
+        const response = await fetch('https://fsa-book-buddy-b6e748d1380d.herokuapp.com/api/users/me', {
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`,
+          },
+        });
+
+        if (!response.ok) {
+          throw new Error('Unauthorized or failed to fetch user info.');
+        }
+
+        const result = await response.json();
+        setUser(result);
+      } catch (err) {
+        console.error('Failed to fetch user info', err);
+        setError('Could not load user info.');
+      }
+    }
+
+    fetchUserData();
+  }, []);
+
+  if (error) return <p>{error}</p>;
+  if (!user) return <p>Loading your account...</p>;
+
+  return (
     <div>
-        <h1>Account</h1>
-        {userInfo ? (
-            <>
-            <h2>Hello, {userInfo.username}</h2>
-            <h3>Checked Out Books:</h3>
-            <ul>
-                {checkedOutBooks.length > 0 ? (
-                    checkedOutBooks.map((book) => <li key={book.id}>{book.title}</li>)
-                ) : (
-                    <p>Nothing Checked out</p>
-                )}
-            </ul>
-            </>
-        ) : (
-            <p>Rendering</p>
-        )}
+      <h2>Welcome, {user.username}!</h2>
+      <p>Email: {user.email}</p>
+      <button
+        onClick={() => {
+          localStorage.removeItem('token');
+          window.location.href = '/Login'; 
+        }}
+      >
+        Log Out
+      </button>
     </div>
-)
+  );
 }
-
-export default Account
